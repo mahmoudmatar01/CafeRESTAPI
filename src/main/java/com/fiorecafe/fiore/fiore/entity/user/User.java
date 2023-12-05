@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Data
@@ -49,16 +48,14 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @OneToOne()
-    @JoinColumn(name = "user_image")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_image_id")
     private UserImage userImage;
+
+    private String userImageUrl;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @Column(nullable = false)
-    private String token;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -88,13 +85,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-    public Map<String, Object> getClaims() {
-        return Map.of(
-                "id", getUserId(),
-                "name", getName(),
-                "email", getEmail(),
-                "gender", getGender()
-        );
     }
 }

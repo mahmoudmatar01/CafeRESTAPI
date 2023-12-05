@@ -32,6 +32,8 @@ public class Item {
 
     private double price;
 
+    private boolean bestOrNot;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

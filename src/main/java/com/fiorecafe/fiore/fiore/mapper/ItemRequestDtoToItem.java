@@ -35,6 +35,7 @@ public class ItemRequestDtoToItem implements Function<ItemRequestDto, Item> {
                    .itemImage(image)
                    .components(itemRequestDto.components())
                    .price(itemRequestDto.price())
+                   .bestOrNot(itemRequestDto.bestOrNot())
                    .category(category)
                    .build();
         } catch (IOException e) {

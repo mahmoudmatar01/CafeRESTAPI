@@ -19,6 +19,7 @@ public class ItemToItemResponseDto implements Function<Item, ItemResponseDto> {
                 .itemImageUrl(item.getImageUrl())
                 .price(item.getPrice())
                 .components(item.getComponents())
+                .bestOrNot(item.isBestOrNot())
                 .categoryId(item.getCategory().getCategoryId())
                 .build();
     }

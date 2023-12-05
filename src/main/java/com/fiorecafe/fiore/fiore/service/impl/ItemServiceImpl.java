@@ -26,6 +26,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<ItemResponseDto> findBestItem() {
+        List<Item>itemLists=itemRepository.findAll().stream().filter(Item::isBestOrNot).toList();
+        return itemLists.stream().map(itemToItemResponseDto::apply).toList();
+    }
+
+    @Override
     public List<ItemResponseDto> findItemByCategoryId(Long categoryId) {
         List<Item>items=itemRepository.findItemsByCategoryId(categoryId);
         return items.stream().map(itemToItemResponseDto::apply).toList();
@@ -52,6 +58,21 @@ public class ItemServiceImpl implements ItemService {
                 ()->new NotFoundResourceException("there is no item with this id")
         );
         itemRepository.delete(item);
+        return itemToItemResponseDto.apply(item);
+    }
+
+    @Override
+    public ItemResponseDto updateBestValue(Long id) {
+        Item item=itemRepository.findById(id).orElseThrow(
+                ()->new NotFoundResourceException("there is no item with this id")
+        );
+        if(item.isBestOrNot()){
+            item.setBestOrNot(false);
+            itemRepository.save(item);
+        }else{
+            item.setBestOrNot(true);
+            itemRepository.save(item);
+        }
         return itemToItemResponseDto.apply(item);
     }
 }

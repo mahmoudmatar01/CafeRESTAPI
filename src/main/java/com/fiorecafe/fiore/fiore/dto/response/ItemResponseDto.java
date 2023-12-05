@@ -9,6 +9,7 @@ public record ItemResponseDto(
         String itemImageUrl,
         String components,
         double price,
+        boolean bestOrNot,
         Long categoryId
 ) {
 

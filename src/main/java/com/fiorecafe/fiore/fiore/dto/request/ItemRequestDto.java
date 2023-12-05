@@ -10,5 +10,6 @@ public record ItemRequestDto(
         MultipartFile image,
         String description,
         String components,
+        boolean bestOrNot,
         double price
 ) {}

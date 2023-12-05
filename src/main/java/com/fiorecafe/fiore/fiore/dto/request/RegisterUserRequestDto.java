@@ -11,6 +11,9 @@ public record RegisterUserRequestDto(
         @NotNull(message = "Name is required")
         @NotBlank(message = "Name is required")
         String name,
+        @NotNull(message = "image is required")
+        @NotBlank(message = "image is required")
+        MultipartFile image,
         @NotNull(message = "email is required")
         @NotBlank(message = "email is required")
         String email,
@@ -19,6 +22,5 @@ public record RegisterUserRequestDto(
         @NotBlank(message = "password is required")
         String password
 ) {
-
 
 }

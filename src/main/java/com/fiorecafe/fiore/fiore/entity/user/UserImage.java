@@ -1,7 +1,5 @@
 package com.fiorecafe.fiore.fiore.entity.user;
 
-import com.fiorecafe.fiore.fiore.entity.category.Category;
-import com.fiorecafe.fiore.fiore.utils.entity.ImageData;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +24,7 @@ public class UserImage {
     @Column(nullable = false)
     private String title;
 
+    @Column(name = "user_photo_url")
     private String userPhotoUrl;
 
 }

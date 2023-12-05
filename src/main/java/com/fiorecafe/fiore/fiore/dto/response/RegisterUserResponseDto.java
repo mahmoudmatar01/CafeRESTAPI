@@ -5,7 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record RegisterUserResponseDto(
-        Integer id,
+        Long id,
         String name,
         String email,
         Role role

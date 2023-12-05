@@ -26,6 +26,12 @@ public class ItemController {
         return ResponseEntity.status(HttpStatus.OK).body(successFactory.createResponse(items));
     }
 
+    @GetMapping("/best")
+    public ResponseEntity<?> getBest() {
+        var items = itemService.findBestItem();
+        return ResponseEntity.status(HttpStatus.OK).body(successFactory.createResponse(items));
+    }
+
     @GetMapping("/{itemId}")
     public ResponseEntity<?> getItemById(@PathVariable Long itemId) {
         var items = itemService.findItemById(itemId);
@@ -36,7 +42,18 @@ public class ItemController {
     public ResponseEntity<?> delItem(@PathVariable Long id) {
         try {
             var category = itemService.removeById(id);
-            return ResponseEntity.ok(successFactory.createResponse(category));
+            return ResponseEntity.status(HttpStatus.OK).body(successFactory.createResponse(category));
+        } catch (BadRequestException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(successFactory.createResponse(ex.getMessage()));
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateBestValue(@PathVariable Long id) {
+        try {
+            var category = itemService.updateBestValue(id);
+            return ResponseEntity.status(HttpStatus.OK).body(successFactory.createResponse(category));
         } catch (BadRequestException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(successFactory.createResponse(ex.getMessage()));
