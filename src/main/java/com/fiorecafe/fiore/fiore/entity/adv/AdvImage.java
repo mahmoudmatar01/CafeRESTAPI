@@ -26,6 +26,7 @@ public class AdvImage {
 
     private byte[] data;
 
+    @Column(name = "adv_photo_url")
     private String advImageUrl;
 
 }

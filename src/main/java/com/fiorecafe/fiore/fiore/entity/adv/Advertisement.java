@@ -16,15 +16,17 @@ import org.hibernate.annotations.OnDeleteAction;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Advertisement {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
 
-    @OneToOne()
-    @JoinColumn(name = "adv_image_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private AdvImage advImage;
+    private String advImageUrl;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "adv_image_id")
+    private AdvImage advImage;
 
 }
