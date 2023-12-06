@@ -1,10 +1,13 @@
 package com.fiorecafe.fiore.fiore.entity.item;
+import com.fiorecafe.fiore.fiore.entity.cart.CartItem;
 import com.fiorecafe.fiore.fiore.entity.category.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Entity
@@ -37,5 +40,8 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> cartItems;
 
 }

@@ -1,4 +1,6 @@
 package com.fiorecafe.fiore.fiore.entity.user;
+import com.fiorecafe.fiore.fiore.entity.cart.Cart;
+import com.fiorecafe.fiore.fiore.entity.order.Order;
 import com.fiorecafe.fiore.fiore.enums.Gender;
 import com.fiorecafe.fiore.fiore.enums.Role;
 import jakarta.persistence.*;
@@ -51,6 +53,13 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_image_id")
     private UserImage userImage;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
 
     private String userImageUrl;
 

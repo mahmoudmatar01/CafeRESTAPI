@@ -61,6 +61,7 @@ public class AuthServiceImpl implements AuthService {
         var token = jwtService.generateToken(claims, user);
         return LoginUserResponseDto.builder()
                 .isAuthenticated(true)
+                .id(user.getUserId())
                 .name(user.getName())
                 .email(user.getEmail())
                 .role(user.getRole())
